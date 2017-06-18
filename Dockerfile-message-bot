@@ -1,0 +1,3 @@
+FROM scratch
+COPY bin/message-bot /mesage-bot
+ENTRYPOINT ["/message-bot"]
