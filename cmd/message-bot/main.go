@@ -68,10 +68,15 @@ type WebhookData struct {
 func (c *Config) Execute(webhookData WebhookData) (err error) {
 	data, err := json.Marshal(webhookData)
 	if err != nil {
+		log.Printf("unable to marshal data: %v", err)
 		return
 	}
 	buf := bytes.NewBuffer(data)
 	resp, err := http.Post(c.WebhookURL, "application/json", buf)
+	if err != nil {
+		log.Printf("unable to execute POST: %v", err)
+		return
+	}
 	defer resp.Body.Close()
 	log.Printf("status: [%s], content length: [%v]", resp.Status, resp.ContentLength)
 	return
