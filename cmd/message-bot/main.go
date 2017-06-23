@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"bytes"
 	"strings"
+	_ "crypto/sha512"
 )
 
 var (
